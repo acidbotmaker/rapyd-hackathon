@@ -95,4 +95,35 @@ const getMyOrders = asyncHandler(async (req, res) => {
 
 
 
-export { addOrderItems, getOrderById, updateOrderToPaid , getMyOrders};
+
+//@description___Getting All Orders ...
+//@route___GET./api/orders...
+//@access___Private/Admin...
+
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders)
+});
+
+
+//@description___Update Order to be Delivered...
+//@route___GET./api/orders/:id/delivered...
+//@access___Private/Admin...
+
+const updateOrderToBeDelivered = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Payment Failed");
+  }
+});
+
+
+
+export { addOrderItems, getOrderById, updateOrderToPaid , getMyOrders, getOrders, updateOrderToBeDelivered};

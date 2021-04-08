@@ -3,6 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './config/data-base.js';
 import colors from 'colors';
+import morgan from 'morgan';
 import {urlNotFound, errorHandler} from './middlewares/errorMiddlewares.js';
 
 // import Routes
@@ -13,6 +14,10 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 
 // invoking express func
 const app = express();
+
+if(process.env.NODE_ENV === 'development'){
+  app.use(morgan('dev'))
+}
 app.use(express.json())
 
 //configure from dotenv module
@@ -21,9 +26,6 @@ dotenv.config();
 //invoking database connection func
 connectDB();
 
-app.get('/', (req,res) => {
-    res.send('API is running...')
-})
 
 //mounting common path 
 app.use('/api/products', productRoutes);
@@ -34,8 +36,25 @@ app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
-const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+  app.get('*',(req,res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  })
+}else{
+  app.get("/", (req, res) => {
+    res.send("API is running...");
+  });
+
+}
+
+
 //custom Middleware for error handling
 
 app.use(urlNotFound);

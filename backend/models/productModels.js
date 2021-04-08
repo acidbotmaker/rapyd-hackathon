@@ -1,12 +1,19 @@
 import mongoose from "mongoose";
 
-const reviewSchema = mongoose.Schema({
-  name: { type: String, required: true },
-  rating: { type: Number, required: true },
-  comments: { type: String, required: true },
-},{
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  {
     timeStamps: true,
-});
+  }
+);
 
 const productSchema = mongoose.Schema(
   {
