@@ -2,6 +2,9 @@
   "name": "florashop",
   "version": "1.0.0",
   "description": "MERN Shopping Cart App with Authentications and Authorizations",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -11,7 +14,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:scrap": "node backend/seeder -d",
-    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Myilvaganan S",
   "license": "MIT",
