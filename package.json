@@ -4,8 +4,11 @@
   "description": "MERN Shopping Cart App with Authentications and Authorizations",
   "main": "server.js",
   "type": "module",
+   "engines": {
+        "node": "14.16.0"
+    },
   "scripts": {
-    "start": "node backend/server",
+    "start": "node backend/server.js",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
