@@ -6,7 +6,7 @@
 
 # Project Done By:  <a href="https://github.com/Myilvaganan" noreferrer target="_blank">Myilvaganan</a>
 
-# This website is to track user's expenses
+# E- Commerce website to sell and buy Products
 
 ## Deployed Website
 
@@ -78,16 +78,16 @@ FLoraShop is a single page application (SPA) that utilises the dashboard compone
 ![FLoraShop Register View](docs/RegisterPage.jpg)
 ![FLoraShop Login View](docs/LoginPage.jpg)
 ![FLoraShop Single Product View Page](docs/SingleProductViewPage.jpg)
-![FLoraShop Profile Page Page](docs/UserProfilePage.jpg)
+![FLoraShop  CustomerReviewsSection View](docs/CustomerReviewsSection.jpg)
+![FLoraShop Add Product Page](docs/AddProduct.jpg)
+![FLoraShop Add Product Page](docs/AddProduct2.jpg)
+![FLoraShop Add to Cart Page](docs/AddToCartPage.jpg)
 ![FLoraShop Shipping Page Page](docs/ShippingPage.jpg)
 ![FLoraShop Order Page](docs/OrderPage.jpg)
 ![FLoraShop Payment Page](docs/PaymentPage.jpg)
 ![FLoraShop Last Page](docs/FInalPageBeforePay.jpg)
-![FLoraShop  CustomerReviewsSection View](docs/CustomerReviewsSection.jpg)
+![FLoraShop Profile Page Page](docs/UserProfilePage.jpg)
 ![FLoraShop Admin Screeen](docs/AdminScreenUsers.jpg)
-![FLoraShop Add to Cart Page](docs/AddToCartPage.jpg)
-![FLoraShop Add Product Page](docs/AddProduct.jpg)
-![FLoraShop Add Product Page](docs/AddProduct2.jpg)
 ![FLoraShop Admin Page](docs/AdminScreenOrder.jpg)
 ![FLoraShop Admin Page](docs/AdminScreenProducts.jpg)
 
