@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ import LoginForm from "../components/TemplateContainer";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
 const ProductEditScreen = ({ match, history }) => {
-
   const productId = match.params.id;
 
   const [name, setName] = useState("");
@@ -21,6 +20,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const [co2Count, setCo2Count] = useState(0);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -55,7 +55,8 @@ const ProductEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateProduct({
+    dispatch(
+      updateProduct({
         _id: productId,
         name,
         price,
@@ -64,31 +65,30 @@ const ProductEditScreen = ({ match, history }) => {
         category,
         description,
         countInStock,
-    }))
+      })
+    );
   };
-
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
-    const formData = new FormData()
-    formData.append('image', file)
-    setUploading(true)
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
 
-    try{
+    try {
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      const {data} = await axios.post('/api/upload', formData, config);
-      setImage(data)
-      setUploading(false)
-    }catch(error){
-      console.error(error)
-      setUploading(false)
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/upload", formData, config);
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
     }
-
-  }
+  };
 
   return (
     <>
@@ -98,7 +98,7 @@ const ProductEditScreen = ({ match, history }) => {
       <LoginForm>
         <h1>EDIT PRODUCT</h1>
         {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger' >{errorUpdate}</Message>}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -134,7 +134,12 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
 
-              <Form.File id="image-file" label="Choose an Image" custom onChange={uploadFileHandler}></Form.File>
+              <Form.File
+                id="image-file"
+                label="Choose an Image"
+                custom
+                onChange={uploadFileHandler}
+              ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
 
@@ -175,6 +180,18 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder="Enter Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="description">
+              <Form.Label>CO2 Count</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter Co2 Count"
+                value={co2Count}
+                max={100}
+                min={0}
+                onChange={(e) => setCo2Count(e.target.value)}
               ></Form.Control>
             </Form.Group>
 

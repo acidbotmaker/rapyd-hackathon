@@ -62,19 +62,18 @@ const deleteProductById = asyncHandler(async (req, res) => {
 
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
-    name: req.body.name,
-    image: "/images/sample.jpg",
-    category: req.body.category,
-    family: req.body.family ,
-    description: req.body.description,
-    reviews: [],
+    name: "Product Name",
+    image: "/images/eclipta-alba.jpg",
+    description: "description",
+    family: "family",
+    category: "Medicinal plants",
+    price: 0,
+    countInStock: 0,
+    rating: 0,
     numReviews: 0,
-    price: req.body.price,
-    countInStock: req.body.countInStock,
-    co2Count: req.body.co2Count ,
+    co2Count: 0,
     user: req.user._id,
   });
-
 
   const createdProduct = await product.save();
   res.status(201).json(createdProduct);
@@ -85,15 +84,8 @@ const createProduct = asyncHandler(async (req, res) => {
 //@access___Private/admin...
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const {
-    name,
-    image,
-    category,
-    family,
-    description,
-    price,
-    countInStock,
-  } = req.body;
+  const { name, image, category, family, description, price, countInStock,co2Count } =
+    req.body;
 
   const product = await Product.findById(req.params.id);
 
@@ -105,6 +97,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.description = description;
     product.price = price;
     product.countInStock = countInStock;
+    product.co2Count = co2Count;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
