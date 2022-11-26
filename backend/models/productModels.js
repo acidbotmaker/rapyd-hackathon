@@ -63,6 +63,11 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    co2Count: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timeStamps: true,
