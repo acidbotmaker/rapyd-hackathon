@@ -16,6 +16,7 @@ const userAuth = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      creditPoints: user.creditPoints,
       token: generateToken(user._id),
     });
   } else {
@@ -46,6 +47,7 @@ const newUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       userRole: user.userRole,
+      creditPoints: user.creditPoints,
       token: generateToken(user._id),
     });
   } else {
@@ -68,6 +70,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       userRole: user.userRole,
+      creditPoints: user.creditPoints,
     });
   } else {
     res.status(404);
@@ -98,6 +101,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
       userRole: updateUser.userRole,
+      creditPoints: user.creditPoints,
       token: generateToken(updatedUser._id),
     });
   } else {
@@ -155,6 +159,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.creditPoints = req.body.creditPoints || user.creditPoints
 
     const updatedUser = await user.save();
 
@@ -164,6 +169,7 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
       userRole: updateUser.userRole,
+      creditPoints: user.creditPoints,
     });
   } else {
     res.status(404);
