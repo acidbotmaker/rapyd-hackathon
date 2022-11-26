@@ -3,16 +3,16 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import users from './product-data/users.js';
 import products from './product-data/products.js';
-import User from './Models/userModels.js';
-import Product from './Models/productModels.js';
-import Order from './Models/orderModels.js';
+import User from './models/userModels.js';
+import Product from './models/productModels.js';
+import Order from './models/orderModels.js';
 import connectDB from './config/data-base.js';
 
 
 dotenv.config();
 connectDB();
 
-const importData = async () =>{
+const importData = async () => {
     try {
         await Order.deleteMany();
         await Product.deleteMany();
@@ -21,8 +21,8 @@ const importData = async () =>{
         const allUsers = await User.insertMany(users)
 
         const adminUser = allUsers[0]._id;
-        const sampleProducts = products.map( p => {
-            return { ...p, user: adminUser}
+        const sampleProducts = products.map(p => {
+            return { ...p, user: adminUser }
         })
 
         await Product.insertMany(sampleProducts);
@@ -39,21 +39,21 @@ const importData = async () =>{
 
 
 const scrapData = async () => {
-  try {
-    await Order.deleteMany();
-    await Product.deleteMany();
-    await User.deleteMany();
+    try {
+        await Order.deleteMany();
+        await Product.deleteMany();
+        await User.deleteMany();
 
-    console.log("Data Scrapped".red.inverse.bold);
-    process.exit();
-  } catch (error) {
-    console.error(`${error}`.red.inverse.bold);
-    process.exit(1);
-  }
+        console.log("Data Scrapped".red.inverse.bold);
+        process.exit();
+    } catch (error) {
+        console.error(`${error}`.red.inverse.bold);
+        process.exit(1);
+    }
 };
 
-if(process.argv[2] === '-d'){
+if (process.argv[2] === '-d') {
     scrapData();
-}else{
+} else {
     importData();
 }
