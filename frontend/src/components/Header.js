@@ -26,6 +26,12 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
+              <LinkContainer to="/redeem">
+                <Nav.Link>
+                  <i className="fa fa-credit-card" aria-hidden="true"></i>
+                  &nbsp;{userInfo.creditPoints ? userInfo.creditPoints : 0} points
+                </Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
